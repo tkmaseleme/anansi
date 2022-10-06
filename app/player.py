@@ -1,7 +1,8 @@
 class Player:
-        def __init__(self, name):
-                self.name = name
-                self.hand = []
+        def __init__(self, name, chips):
+                self.name       = name
+                self.hand       = []
+                self.chips      = chips
                 
         def draw(self, deck):
                 self.hand.append(deck.drawCard())
@@ -9,4 +10,4 @@ class Player:
         
         def showHand(self):
                 for card in self.hand:
-                        card.show()
+                        print(card.show())

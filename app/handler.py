@@ -4,15 +4,15 @@ from deck import Deck
 from player import Player
 
 
-# deck = Deck()
-# deck.shuffle()
+deck = Deck()
+deck.shuffle()
 
-# josh = Player("Bob")
-# for x in range(1,6):
-#         josh.draw(deck)
+amira = Player("Amira", 1000)
+for x in range(1,6):
+        amira.draw(deck)
         
-# print("Josh's cards are: ")
-# josh.showHand()
+print("Amira's cards are: ")
+amira.showHand()
 
-test = Card("Spades", 1)
-print(test.show())
+# test = Card("Spades", 1)
+# print(test.show())
