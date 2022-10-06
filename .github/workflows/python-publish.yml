@@ -1,0 +1,30 @@
+name: Python Test
+
+on:
+  push:
+    branches: [master]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: [3.8.9]
+
+    steps:
+    - uses: actions/checkout@master
+    
+    - name: Set Up Python 
+      uses: actions/setup-python@v3
+      with:
+        python-version: ${{matrix.python-version}}
+
+    - name: Install Dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Run Python Unit Test
+      run: python -m pytest --verbose --import-mode=append tests/
+      
