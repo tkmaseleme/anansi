@@ -3,7 +3,7 @@ class Card:
                 self.suit = suit
                 self.value = val
                        
-        def show(self):
+        def show(self) -> str:
                 
                 if self.suit not in ["Spades", "Clubs", "Diamonds", "Hearts"] and self.value in range(1, 14):
                         return "Card Suit Invalid"
@@ -18,6 +18,6 @@ class Card:
                                 self.value = "King"
                         elif self.value == 1:
                                 self.value = "Ace"  
-                        return ("{} of {}".format(self.value, self.suit))   
+                        return "{} of {}".format(self.value, self.suit)
                 else:
                         return "Card Completely Invalid"

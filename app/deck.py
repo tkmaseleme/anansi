@@ -9,7 +9,7 @@ class Deck:
         def build(self):
                 for s in ["Spades", "Clubs", "Diamonds", "Hearts"]:
                         for v in range(1, 14):
-                                self.cards.append(Card(s, v))
+                                self.cards.append(repr(Card(s, v)))
                                 
         def shuffle(self):
                 for i in range(len(self.cards) -1, 0, -1):
