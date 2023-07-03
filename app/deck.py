@@ -7,9 +7,7 @@ class Deck:
 
     def create_deck(self):
         suits = ["Hearts", "Diamonds", "Clubs", "Spades"]
-        ranks = [
-            "Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King"
-        ]
+        ranks = ["Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King"]
 
         for suit in suits:
             for rank in ranks:
@@ -20,9 +18,7 @@ class Deck:
         random.shuffle(self.cards)
 
     def draw_card(self):
-        if len(self.cards) == 0:
+        if len(self.cards) > 0:
+            return self.cards.pop()
+        else:
             return None
-        return self.cards.pop()
-
-    def __str__(self):
-        return "\n".join(str(card) for card in self.cards)
