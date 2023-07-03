@@ -69,18 +69,11 @@ class Player:
     def __init__(self, name, money):
         self.name = name
         self.money = money
-        self.cards = []
-
-    def draw_card(self, deck):
-        card = deck.draw_card()
-        if card is not None:
-            self.cards.append(card)
 
     def save_data(self):
         player_data = {
             "name": self.name,
-            "money": self.money,
-            "cards": [str(card) for card in self.cards]
+            "money": self.money
         }
 
         file_path = f"{self.name}_data.json"
@@ -95,28 +88,16 @@ class Player:
             with open(file_path, "r") as file:
                 player_data = json.load(file)
                 self.money = player_data["money"]
-                self.cards = [Card(card["suit"], card["rank"]) for card in player_data["cards"]]
-
-    def show_hand(self):
-        print(f"\n{self.name}'s hand:")
-        for card in self.cards:
-            print(card)
 
 class Dealer(Player):
-    def show_hand(self, hide_first_card=False):
-        print(f"\n{self.name}'s hand:")
-        self.cards[0].hidden = hide_first_card
-        for card in self.cards:
-            if card.hidden:
-                print("Hidden Card")
-            else:
-                print(card)
+    pass
 
 class BlackjackGame:
     def __init__(self):
         self.player = None
         self.dealer = None
-        self.minimum_bet = 9
+        self.deck = None
+        self.minimum_bet = 10
 
     def setup_game(self):
         self.deck = Deck()
@@ -124,44 +105,51 @@ class BlackjackGame:
 
         print("--- Welcome to Blackjack! ---")
         name = input("Enter your name: ")
-        self.player = Player(name, 100)
-        self.dealer = Dealer("Dealer", float("inf"))
 
-        self.player.load_data()
+        file_path = f"{name}_data.json"
+        if os.path.exists(file_path):
+            self.player = Player(name, 0)
+            self.player.load_data()
+        else:
+            money = int(input("Enter your starting money: $"))
+            self.player = Player(name, money)
+            self.player.save_data()
+
+        self.dealer = Dealer("Dealer", float("inf"))
 
     def get_bet(self):
         while True:
             try:
                 bet = int(input("\nPlace your bet: $"))
                 if bet < self.minimum_bet:
-                    print("Invalid bet. The minimum bet is $9.")
-                elif bet <= self.player.money:
-                    return bet
-                else:
+                    print("Invalid bet. The minimum bet is $", self.minimum_bet)
+                elif bet > self.player.money:
                     print("Invalid bet. You don't have enough money.")
+                else:
+                    return bet
             except ValueError:
                 print("Invalid bet. Please enter a valid amount.")
 
     def play_round(self):
         print("\n---\nYour Turn")
-        self.player.cards = []
+        self.player_hand = Hand()
 
         bet = self.get_bet()
 
-        self.player.draw_card(self.deck)
-        self.player.draw_card(self.deck)
+        self.player_hand.add_card(self.deck.draw_card())
+        self.player_hand.add_card(self.deck.draw_card())
 
         print("\nPlayer's Hand:")
-        self.player.show_hand()
+        self.player_hand.show()
 
         choice = input("\nDo you want to hit or stand? (h/s): ")
 
         while choice.lower() == "h":
-            self.player.draw_card(self.deck)
+            self.player_hand.add_card(self.deck.draw_card())
             print("\nPlayer's Hand:")
-            self.player.show_hand()
+            self.player_hand.show()
 
-            if self.player.hand.get_value() > 21:
+            if self.player_hand.get_value() > 21:
                 print("You busted!")
                 break
 
@@ -169,22 +157,22 @@ class BlackjackGame:
 
         print("\n---\nYour Turn ended.")
 
-        if self.player.hand.get_value() <= 21:
+        if self.player_hand.get_value() <= 21:
             print("\n---\nDealer's Turn")
-            self.dealer.cards = []
+            self.dealer_hand = Hand()
 
-            self.dealer.draw_card(self.deck)
-            self.dealer.draw_card(self.deck, hide_first_card=True)
+            self.dealer_hand.add_card(self.deck.draw_card())
+            self.dealer_hand.add_card(self.deck.draw_card())
 
             print("\nDealer's Hand:")
-            self.dealer.show_hand(hide_first_card=True)
+            self.dealer_hand.show(hide_first_card=True)
 
-            while self.dealer.hand.get_value() < 17:
-                self.dealer.draw_card(self.deck)
+            while self.dealer_hand.get_value() < 17:
+                self.dealer_hand.add_card(self.deck.draw_card())
                 print("\nDealer's Hand:")
-                self.dealer.show_hand(hide_first_card=True)
+                self.dealer_hand.show(hide_first_card=True)
 
-                if self.dealer.hand.get_value() > 21:
+                if self.dealer_hand.get_value() > 21:
                     print("Dealer busted!")
                     break
 
@@ -193,14 +181,14 @@ class BlackjackGame:
         self.evaluate_round(bet)
 
     def evaluate_round(self, bet):
-        player_value = self.player.hand.get_value()
-        dealer_value = self.dealer.hand.get_value()
+        player_value = self.player_hand.get_value()
+        dealer_value = self.dealer_hand.get_value()
 
         print(f"\n---\nFinal Results:")
         print(f"\n{self.player.name}'s hand:")
-        self.player.show_hand()
+        self.player_hand.show()
         print(f"\n{self.dealer.name}'s hand:")
-        self.dealer.show_hand()
+        self.dealer_hand.show()
 
         if player_value > 21:
             print("\nYou busted! Dealer wins.\n")
@@ -235,12 +223,9 @@ class BlackjackGame:
 
         self.player.save_data()
 
-        print("\n---\nTotal Wins:")
-        print(f"{self.player.name}: {self.player.wins}")
+        print(f"\n---\n{self.player.name}'s Money: ${self.player.money}")
 
-        print(f"{self.player.name}'s Money: ${self.player.money}")
-
-        print(f"{self.dealer.name}: {self.dealer.wins}")
+        print("\nThanks for playing Blackjack!")
 
 game = BlackjackGame()
 game.run()
