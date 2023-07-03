@@ -2,6 +2,7 @@ import json
 import os
 import random
 
+# Class creates one card
 class Card:
     def __init__(self, suit, rank):
         self.suit = suit
@@ -10,6 +11,8 @@ class Card:
     def __str__(self):
         return f"{self.rank} of {self.suit}"
 
+# Can create a deck of 52 cards and draw one card 
+# Reusable
 class Deck:
     def __init__(self):
         self.cards = []
