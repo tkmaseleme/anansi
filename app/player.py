@@ -1,26 +1,25 @@
 import json
 
 class Player:
-        def __init__(self, name, chips):
-                self.name       = name
-                self.hand       = []
-                self.chips      = chips
-            
-        def draw(self, deck):
-                # print(list(self.hand))
-                self.hand.append(deck.drawCard())
-                return self
-        
-        def showHand(self):
-                for card in self.hand:
-                        print(card.show())
-                        
-        def player_profile(self):
-                profile = {
-                        "Name": (self.name).title(),
-                        "Balance": self.chips,
-                        "Cards": repr(self.hand)
-                }
-                
-                with open(self.name + ".json", "w") as playout:
-                        json.dump(profile, playout)
+    def __init__(self, name, money):
+        self.name = name
+        self.money = money
+        self.cards = []
+
+        # Create a profile for the player
+        self.create_profile()
+
+    def create_profile(self):
+        profile = {
+            "name": self.name,
+            "money": self.money,
+            "cards": []
+        }
+
+        # Save the profile to a JSON file
+        filename = f"profile_{self.name}.json"
+        with open(filename, "w") as file:
+            json.dump(profile, file)
+
+    def add_card(self, card):
+        self.cards.append(card)
