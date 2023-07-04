@@ -1,5 +1,5 @@
 import pytest
-import app
+import blackjack
 import sys
 
 print(sys.path)
