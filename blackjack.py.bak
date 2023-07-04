@@ -1,14 +1,37 @@
-#
-# The file blackjack.py
-#
-# Created On Tue Jul 04 2023
-#
-# Copyright (c) 2023 Trevor K Maseleme
-#
-
 import json
 import os
-from deck import Deck
+import random
+
+# Class creates one card
+class Card:
+    def __init__(self, suit, rank):
+        self.suit = suit
+        self.rank = rank
+
+    def __str__(self):
+        return f"{self.rank} of {self.suit}"
+
+# Can create a deck of 52 cards and draw one card 
+# Reusable
+class Deck:
+    def __init__(self):
+        self.cards = []
+
+        suits = ["Hearts", "Diamonds", "Clubs", "Spades"]
+        ranks = ["Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King"]
+
+        for suit in suits:
+            for rank in ranks:
+                self.cards.append(Card(suit, rank))
+
+    def shuffle(self):
+        random.shuffle(self.cards)
+
+    def draw_card(self):
+        if len(self.cards) > 0:
+            return self.cards.pop()
+        else:
+            return None
 
 class Hand:
     def __init__(self):
@@ -206,3 +229,6 @@ class BlackjackGame:
         print(f"\n---\n{self.player.name}'s Money: ${self.player.money}")
 
         print("\nThanks for playing Blackjack!")
+
+game = BlackjackGame()
+game.run()
