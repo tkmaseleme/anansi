@@ -6,9 +6,14 @@ class HighLow:
         self.deck.shuffle()
 
     def play(self):
-        print("Welcome to High/Low game!")
-        print("Guess if the next card is higher or lower than the current card.")
-        print("To exit the game, enter 'exit'.")
+        print("*******************************************************************")
+        print("*                  Welcome to High/Low game!                      *")
+        print("*-----------------------------------------------------------------*")
+        print("* Guess if the next card is higher or lower than the current card.*")
+        print("*                  To exit the game, enter 'exit'.                *")
+        print("*-----------------------------------------------------------------*")
+        print("*                       Have Fun!!!                               *")
+        print("*******************************************************************")
 
         current_card = self.deck.draw_card()
         while current_card:
