@@ -1,4 +1,4 @@
-from high_low import HighLowGame
+from high_low import HighLow
 
-game = HighLowGame()
+game = HighLow()
 game.play()

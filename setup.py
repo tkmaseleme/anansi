@@ -16,6 +16,6 @@ setuptools.setup(
         "Bug Tracker": "https://github.com/tkmaseleme/blackjack/issues"
     },
     license='MIT',
-    packages=['blackjack'],
+    packages=['blackjack', 'high_low'],
     install_requires=[''],
 )

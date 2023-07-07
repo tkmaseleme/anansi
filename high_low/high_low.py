@@ -18,7 +18,7 @@ class HighLow:
         current_card = self.deck.draw_card()
         while current_card:
             print("\nCurrent card:", current_card)
-            guess = input("Will the next card be 'higher' or 'lower'? ")
+            guess = input("Will the next card be 'higher' or 'lower'(h/l)? ")
             if guess.lower() == 'exit':
                 break
 
@@ -40,8 +40,8 @@ class HighLow:
         rank1_index = ranks.index(card1.rank)
         rank2_index = ranks.index(card2.rank)
         if rank1_index < rank2_index:
-            return "higher"
+            return "h"
         elif rank1_index > rank2_index:
-            return "lower"
+            return "l"
         else:
             return "equal"
