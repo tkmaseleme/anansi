@@ -1,0 +1,7 @@
+LICENSE
+README.md
+setup.py
+anansi.egg-info/PKG-INFO
+anansi.egg-info/SOURCES.txt
+anansi.egg-info/dependency_links.txt
+anansi.egg-info/top_level.txt
