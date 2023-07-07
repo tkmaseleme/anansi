@@ -1,98 +1,42 @@
-import random
+from deck import Deck
 
-class Card:
-    def __init__(self, suit, rank):
-        self.suit = suit
-        self.rank = rank
-
-    def __str__(self):
-        return f"{self.rank} of {self.suit}"
-
-class Deck:
-    def __init__(self):
-        self.cards = []
-
-        suits = ["Hearts", "Diamonds", "Clubs", "Spades"]
-        ranks = ["Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King"]
-
-        for suit in suits:
-            for rank in ranks:
-                self.cards.append(Card(suit, rank))
-
-    def shuffle(self):
-        random.shuffle(self.cards)
-
-    def draw_card(self):
-        if len(self.cards) > 0:
-            return self.cards.pop()
-        else:
-            return None
-
-class WarGame:
+class HighLow:
     def __init__(self):
         self.deck = Deck()
         self.deck.shuffle()
 
     def play(self):
-        print("Welcome to the War Card Game!")
-        print("----------------------------")
-        player_name = input("Enter your name: ")
-        print(f"Hello {player_name}! You'll be playing against Aaron.")
+        print("Welcome to High/Low game!")
+        print("Guess if the next card is higher or lower than the current card.")
+        print("To exit the game, enter 'exit'.")
 
-        player_hand = []
-        computer_hand = []
+        current_card = self.deck.draw_card()
+        while current_card:
+            print("\nCurrent card:", current_card)
+            guess = input("Will the next card be 'higher' or 'lower'? ")
+            if guess.lower() == 'exit':
+                break
 
-        # Deal cards to players
-        while len(self.deck.cards) > 0:
-            player_hand.append(self.deck.draw_card())
-            computer_hand.append(self.deck.draw_card())
-
-        player_score = 0
-        computer_score = 0
-
-        # Compare cards
-        for i in range(len(player_hand)):
-            player_card = player_hand[i]
-            computer_card = computer_hand[i]
-
-            print(f"\nYour card: {player_card}")
-
-            # Get the player's guess
-            player_guess = input("Do you think Aaron's card is higher or lower? (h/l): ")
-
-            print(f"Aaron's card: {computer_card}")
-
-            # Compare ranks
-            if player_card.rank > computer_card.rank:
-                if player_guess == 'h':
-                    print("Your guess is correct! You win the round!")
-                    player_score += 1
+            next_card = self.deck.draw_card()
+            if next_card:
+                print("Next card:", next_card)
+                if self.compare_cards(current_card, next_card) == guess.lower():
+                    print("Correct guess!")
                 else:
-                    print("Your guess is incorrect! Aaron wins the round!")
-                    computer_score += 1
-            elif player_card.rank < computer_card.rank:
-                if player_guess == 'l':
-                    print("Your guess is correct! You win the round!")
-                    player_score += 1
-                else:
-                    print("Your guess is incorrect! Aaron wins the round!")
-                    computer_score += 1
+                    print("Wrong guess!")
+                current_card = next_card
             else:
-                print("It's a tie!")
+                print("No more cards in the deck.")
+                break
 
-        print("\n-------------------------")
-        print("Game Over!")
-        print(f"Your score: {player_score}")
-        print(f"Aaron's score: {computer_score}")
-
-        # Determine the winner
-        if player_score > computer_score:
-            print(f"Congratulations {player_name}! You win the game!")
-        elif player_score < computer_score:
-            print("Aaron wins the game. Better luck next time!")
+    @staticmethod
+    def compare_cards(card1, card2):
+        ranks = ["Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King"]
+        rank1_index = ranks.index(card1.rank)
+        rank2_index = ranks.index(card2.rank)
+        if rank1_index < rank2_index:
+            return "higher"
+        elif rank1_index > rank2_index:
+            return "lower"
         else:
-            print("It's a tie!")
-
-# Start the game
-game = WarGame()
-game.play()
+            return "equal"
