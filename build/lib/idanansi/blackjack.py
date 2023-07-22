@@ -8,7 +8,7 @@
 
 import json
 import os
-from deck import Deck
+from anansi.deck import Deck
 
 class Hand:
     def __init__(self):
