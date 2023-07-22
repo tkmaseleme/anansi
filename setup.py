@@ -1,4 +1,4 @@
-from setuptools import setup
+from setuptools import setup, find_packages
 
 setup (
     name="anansi",
@@ -6,7 +6,7 @@ setup (
     description="Latest patch?",
     author="Trevor Maseleme",
     url="https://github.com/tkmaseleme/anansi",
-
+    packages=find_packages(),
     project_urls = {
         "Bug Tracker": "https://github.com/tkmaseleme/anansi/issues"
     },
