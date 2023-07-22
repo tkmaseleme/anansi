@@ -1,17 +1,12 @@
-import setuptools
+from setuptools import setup
 
-with open("README.md", "r", encoding="utf-8") as fh:
-    long_description = fh.read()
+setup (
+    name="anansi",
+    version='1.1.0',
+    description="Latest patch?",
+    author="Trevor Maseleme",
+    url="https://github.com/tkmaseleme/anansi",
 
-setuptools.setup(
-    name='anansi',
-    version='1.0.0',
-    author='Trevor Maseleme',
-    author_email='tkmaseleme@gmail.com',
-    description='Package to allow you to include several card and kids games in your code',
-    long_description=long_description,
-    long_description_content_type="text/markdown",
-    url='https://github.com/tkmaseleme/anansi',
     project_urls = {
         "Bug Tracker": "https://github.com/tkmaseleme/anansi/issues"
     },
