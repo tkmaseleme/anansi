@@ -8,7 +8,7 @@
 
 
 import random
-from card import Card
+from anansi.card import Card
 
 # This creates a deck of 52 cards
 class Deck:
