@@ -1,5 +1,5 @@
-from anansi.card import Card
-from anansi.high_low import HighLow
+from idanansi.card import Card
+from idanansi.high_low import HighLow
 
 def test_high_low_setup():
     high_low_game = HighLow()

@@ -8,7 +8,7 @@
 
 import json
 import os
-from anansi.deck import Deck
+from idanansi.deck import Deck
 
 class Hand:
     def __init__(self):
@@ -164,7 +164,7 @@ class BlackjackGame:
         player_value = self.player_hand.get_value()
         dealer_value = self.dealer_hand.get_value()
 
-        print(f"\n---\nFinal Results:")
+        print("\n---\nFinal Results:")
         print(f"\n{self.player.name}'s hand:")
         self.player_hand.show()
         print(f"\n{self.dealer.name}'s hand:")

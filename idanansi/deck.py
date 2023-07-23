@@ -8,7 +8,7 @@
 
 
 import random
-from anansi.card import Card
+from idanansi.card import Card
 
 # This creates a deck of 52 cards
 class Deck:
@@ -16,7 +16,8 @@ class Deck:
         self.cards = []
 
         suits = ["Hearts", "Diamonds", "Clubs", "Spades"]
-        ranks = ["Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King"]
+        ranks = ["Ace", "2", "3", "4", "5", "6", 
+                 "7", "8", "9", "10", "Jack", "Queen", "King"]
 
         for suit in suits:
             for rank in ranks:

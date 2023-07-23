@@ -1,4 +1,4 @@
-from anansi.deck import Deck
+from idanansi.deck import Deck
 
 class HighLow:
     def __init__(self):
@@ -36,7 +36,8 @@ class HighLow:
 
     @staticmethod
     def compare_cards(card1, card2):
-        ranks = ["Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King"]
+        ranks = ["Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", 
+                 "Queen", "King"]
         rank1_index = ranks.index(card1.rank)
         rank2_index = ranks.index(card2.rank)
         if rank1_index < rank2_index:

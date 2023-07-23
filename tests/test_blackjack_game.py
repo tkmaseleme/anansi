@@ -1,9 +1,9 @@
 # tests/test_blackjack_game.py
-from anansi.blackjack import BlackjackGame
-from anansi.blackjack import Player
-from anansi.blackjack import Hand
-from anansi.card import Card
-from anansi.deck import Deck
+from idanansi.blackjack import BlackjackGame
+from idanansi.blackjack import Player
+from idanansi.blackjack import Hand
+from idanansi.card import Card
+from idanansi.deck import Deck
     
 def test_blackjack_game_setup():
     game = BlackjackGame()
