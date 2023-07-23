@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup (
     name="ldanansi",
-    version='1.1.1',
+    version='1.1.2',
     description="Latest patch?",
     author="Trevor Maseleme",
     url="https://github.com/tkmaseleme/anansi",
