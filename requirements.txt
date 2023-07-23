@@ -7,7 +7,6 @@ docutils==0.20.1
 exceptiongroup==1.1.2
 idna==3.4
 itsdangerous==2.1.2
-jaraco.classes==3.3.0
 Jinja2==3.1.2
 keyring==24.2.0
 markdown-it-py==3.0.0
