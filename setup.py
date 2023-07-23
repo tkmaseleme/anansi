@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup (
-    name="ldanansi",
+    name="anansi",
     version='1.1.4',
     description="Latest patch?",
     author="Trevor Maseleme",

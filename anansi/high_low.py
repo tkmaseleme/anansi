@@ -1,4 +1,4 @@
-from idanansi.deck import Deck
+from anansi.deck import Deck
 
 class HighLow:
     def __init__(self):
