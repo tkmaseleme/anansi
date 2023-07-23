@@ -13,7 +13,7 @@ setup (
     classifiers= [
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
-        "Operating System :: MacOS :: MacOS X",
-        "Operating System :: Microsoft :: Windows",
+        "Operating System :: OS Independent",
+
     ]
 )
